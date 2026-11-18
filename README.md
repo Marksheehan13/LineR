@@ -1,8 +1,12 @@
 # LineR (IS3329 Deliverable 2)
 
+![tests](https://github.com/Marksheehan13/LineR/actions/workflows/tests.yml/badge.svg)
+
 LineR reads an Irish invoice or receipt with OCR, shows the extracted fields next to the image so you
 check them instead of typing them, suggests a VAT band for lines that print none, splits the document
 into one row per tax band, numbers it, and exports the rows to Excel.
+
+Repository: https://github.com/Marksheehan13/LineR
 
 This is a prototype: **one hard-coded demo user, local use only, synthetic documents only.** Do not
 upload real client documents.
@@ -19,8 +23,21 @@ Install the two programs:
 
 - **macOS:** `brew install tesseract poppler`
 - **Ubuntu / Debian:** `sudo apt install tesseract-ocr poppler-utils`
-- **Windows:** install Tesseract from the UB Mannheim build and Poppler for Windows, and add both `bin`
-  folders to your `PATH`. Check with `tesseract --version` and `pdftoppm -h` in a new terminal.
+- **Windows (PowerShell):**
+  ```
+  winget install UB-Mannheim.TesseractOCR
+  winget install oschwartz10612.Poppler
+  ```
+  Then add both programs to your `PATH` (this also fixes it for the current window), and **reopen
+  your terminal or IDE**:
+  ```
+  $pop = (Get-ChildItem "$env:LOCALAPPDATA\Microsoft\WinGet\Packages" -Recurse -Filter pdftoppm.exe | Select-Object -First 1).DirectoryName
+  $tess = "C:\Program Files\Tesseract-OCR"
+  $env:Path += ";$tess;$pop"
+  [Environment]::SetEnvironmentVariable("Path", [Environment]::GetEnvironmentVariable("Path","User") + ";$tess;$pop", "User")
+  ```
+  Check with `tesseract --version` and `pdftoppm -v`. If either says "not recognized", the tests that
+  read images or PDFs fail or skip.
 
 ## Install, run, test
 
@@ -31,7 +48,7 @@ python -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 
-pytest                             # all tests, one command
+python -m pytest -q                # all 220 tests, one command (a bare `pytest` also works)
 python run.py                      # then open http://127.0.0.1:5000
 ```
 
@@ -54,6 +71,8 @@ Measure reading accuracy on them: `python -m tools.evaluate --dir data/synthetic
 Train and evaluate the classifier: `python -m tools.train_classifier`.
 
 ## How the code matches the design
+
+![Architecture as built](docs/architecture_d2.png)
 
 The package mirrors the six layers of the target architecture (Deliverable 1, section 1.3). One module per
 component; `tests/test_architecture.py` fails if a layer imports another instead of using an interface.
