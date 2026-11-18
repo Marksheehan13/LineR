@@ -1,7 +1,7 @@
 import io
 
 import pytest
-from PIL import Image, ImageDraw, ImageFont
+from PIL import Image, ImageDraw
 
 from liner.integration.ocr_service import TesseractOcrEngine
 from liner.integration.pdf_renderer import PillowPopplerRenderer

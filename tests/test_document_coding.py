@@ -5,9 +5,9 @@ from decimal import Decimal as D
 
 import pytest
 
-from liner.models import UNSET, Edits, LineEdit, OcrError, Upload
+from liner.models import Edits, LineEdit, Upload
 from tests.conftest import USER
-from tests.helpers import FakeOcrEngine, INVOICE_ROWS, RECEIPT_ROWS, ocr_from_rows, unreadable
+from tests.helpers import FakeOcrEngine, INVOICE_ROWS, ocr_from_rows, unreadable
 
 
 def accept_all(doc):

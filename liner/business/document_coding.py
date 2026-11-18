@@ -14,7 +14,6 @@ from __future__ import annotations
 import dataclasses
 import logging
 from datetime import datetime, timezone
-from decimal import Decimal
 
 from ..interfaces import (AuditLog, Classifier, DocumentRenderer, DocumentRepository, ExcelExporter,
                           FieldExtractor, ImageStore, Numbering, OcrEngine, ReviewPolicy, VatCalculator)

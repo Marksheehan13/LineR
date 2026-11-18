@@ -9,7 +9,6 @@ from __future__ import annotations
 
 import argparse
 from collections import Counter
-from decimal import Decimal
 
 from liner.business.classifier import MODEL_NAME, NaiveBayesClassifier
 from liner.config import Config

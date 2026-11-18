@@ -8,7 +8,6 @@ retraining ~2,000 short lines takes well under a second (deviation log D-05).
 It is a suggestion only. Every suggested band must be confirmed by the user, line by line."""
 from __future__ import annotations
 
-import re
 from collections import Counter, defaultdict
 from datetime import datetime, timezone
 from decimal import Decimal

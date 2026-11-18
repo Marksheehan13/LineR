@@ -6,14 +6,14 @@ module (Simplified in Deliverable 1: the target has a separate package for them)
 from __future__ import annotations
 
 import logging
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from decimal import Decimal
 from typing import Sequence
 
 from flask import (Blueprint, Response, abort, redirect, render_template, request, url_for)
 
 from ..interfaces import Authenticator, DocumentCoder
-from ..models import Document, Line, ReviewFlag, ReviewReport
+from ..models import Document, ReviewFlag, ReviewReport
 from ..parsing import band_key
 from .input_validation import UploadLimits, ValidationError, parse_edits, validate_upload
 

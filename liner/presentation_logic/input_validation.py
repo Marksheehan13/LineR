@@ -12,7 +12,7 @@ from typing import Mapping
 
 from PIL import Image, UnidentifiedImageError
 
-from ..models import UNSET, Edits, LineEdit, Upload
+from ..models import Edits, LineEdit, Upload
 from ..parsing import parse_amount, parse_date, parse_rate
 
 _MAGIC = ((b"\x89PNG\r\n\x1a\n", "png"), (b"\xff\xd8\xff", "jpg"), (b"%PDF-", "pdf"))
