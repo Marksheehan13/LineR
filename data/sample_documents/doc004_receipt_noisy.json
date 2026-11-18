@@ -1,0 +1,41 @@
+{
+  "layout": "receipt",
+  "quality": "noisy",
+  "supplier": "Bridge Street Cafe",
+  "date": "2026-07-13",
+  "total": "253.94",
+  "lines": [
+    {
+      "detail": "overnight accommodat",
+      "amount": "119.09",
+      "band": "0",
+      "printed_rate": false,
+      "item_type": "accommodation"
+    },
+    {
+      "detail": "ELECTRICIAN CALL OUT",
+      "amount": "96.73",
+      "band": "13.5",
+      "printed_rate": false,
+      "item_type": "building work"
+    },
+    {
+      "detail": "prem diesel",
+      "amount": "16.39",
+      "band": "0",
+      "printed_rate": false,
+      "item_type": "road fuel"
+    },
+    {
+      "detail": "1 X DEEP CLEAN PREMI",
+      "amount": "21.73",
+      "band": "13.5",
+      "printed_rate": false,
+      "item_type": "cleaning service"
+    }
+  ],
+  "printed_vat": {
+    "0": "0.00",
+    "13.5": "14.09"
+  }
+}

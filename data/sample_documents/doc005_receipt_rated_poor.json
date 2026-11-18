@@ -1,0 +1,38 @@
+{
+  "layout": "receipt_rated",
+  "quality": "poor",
+  "supplier": "Tralee Roofing Ltd",
+  "date": "2026-07-19",
+  "total": "294.40",
+  "lines": [
+    {
+      "detail": "bin liners inc deliv",
+      "amount": "91.00",
+      "band": "23",
+      "printed_rate": true,
+      "item_type": "cleaning goods"
+    },
+    {
+      "detail": "1 x irish times",
+      "amount": "85.68",
+      "band": "9",
+      "printed_rate": true,
+      "item_type": "publications"
+    },
+    {
+      "detail": "magazine monthly",
+      "amount": "33.98",
+      "band": "9",
+      "printed_rate": true,
+      "item_type": "publications"
+    },
+    {
+      "detail": "4 staff lunch - prom",
+      "amount": "83.74",
+      "band": "0",
+      "printed_rate": true,
+      "item_type": "meals out"
+    }
+  ],
+  "printed_vat": {}
+}

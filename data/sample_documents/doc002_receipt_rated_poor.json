@@ -1,0 +1,38 @@
+{
+  "layout": "receipt_rated",
+  "quality": "poor",
+  "supplier": "Cahir Plumbing Services",
+  "date": "2026-07-12",
+  "total": "258.19",
+  "lines": [
+    {
+      "detail": "1 x painting and dec",
+      "amount": "118.65",
+      "band": "13.5",
+      "printed_rate": true,
+      "item_type": "building work"
+    },
+    {
+      "detail": "3 x filing cabinet p",
+      "amount": "30.60",
+      "band": "23",
+      "printed_rate": true,
+      "item_type": "furniture"
+    },
+    {
+      "detail": "3 x car hire 3 days",
+      "amount": "41.26",
+      "band": "13.5",
+      "printed_rate": true,
+      "item_type": "other 13.5"
+    },
+    {
+      "detail": "standing charge elec",
+      "amount": "67.68",
+      "band": "13.5",
+      "printed_rate": true,
+      "item_type": "energy"
+    }
+  ],
+  "printed_vat": {}
+}

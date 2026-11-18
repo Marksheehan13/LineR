@@ -1,0 +1,19 @@
+{
+  "layout": "invoice",
+  "quality": "noisy",
+  "supplier": "Quay Street News",
+  "date": "2026-09-03",
+  "total": "56.39",
+  "lines": [
+    {
+      "detail": "butter",
+      "amount": "56.39",
+      "band": "0",
+      "printed_rate": true,
+      "item_type": "basic food"
+    }
+  ],
+  "printed_vat": {
+    "0": "0.00"
+  }
+}

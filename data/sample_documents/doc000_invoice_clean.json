@@ -1,0 +1,27 @@
+{
+  "layout": "invoice",
+  "quality": "clean",
+  "supplier": "Westbridge Newsagents",
+  "date": "2026-08-12",
+  "total": "37.91",
+  "lines": [
+    {
+      "detail": "4 BUTTER INC DELIVER",
+      "amount": "36.39",
+      "band": "0",
+      "printed_rate": true,
+      "item_type": "basic food"
+    },
+    {
+      "detail": "1 x kerosene 500 lit",
+      "amount": "1.52",
+      "band": "13.5",
+      "printed_rate": true,
+      "item_type": "energy"
+    }
+  ],
+  "printed_vat": {
+    "0": "0.00",
+    "13.5": "0.18"
+  }
+}

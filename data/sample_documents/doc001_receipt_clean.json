@@ -1,0 +1,19 @@
+{
+  "layout": "receipt",
+  "quality": "clean",
+  "supplier": "Harbour IT Supplies",
+  "date": "2026-04-12",
+  "total": "80.41",
+  "lines": [
+    {
+      "detail": "4 STICKY NOTES",
+      "amount": "80.41",
+      "band": "23",
+      "printed_rate": false,
+      "item_type": "stationery"
+    }
+  ],
+  "printed_vat": {
+    "23": "15.04"
+  }
+}
