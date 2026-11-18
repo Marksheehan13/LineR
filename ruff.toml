@@ -1,0 +1,7 @@
+# Lint for real defects only (pyflakes errors and syntax errors).
+# Style rules are left off on purpose: the code is formatted for readability, not to a rule set.
+target-version = "py312"
+extend-exclude = [".venv", "var"]
+
+[lint]
+select = ["F", "E9"]
