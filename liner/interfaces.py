@@ -4,6 +4,10 @@ Each is a ``typing.Protocol``: a component is anything with these methods. Layer
 and never on each other's concrete classes, so replacing one implementation (SQLite for PostgreSQL,
 Tesseract for a managed OCR service, the demo user for real accounts) changes one class and one
 line in ``liner/app.py``.
+
+``models.py`` (plain data types), ``parsing.py`` and ``config.py`` are the shared kernel: every layer
+may import them, because they hold no behaviour that belongs to one layer. ``tests/test_architecture.py``
+allows exactly that and nothing more between layers.
 """
 from __future__ import annotations
 
