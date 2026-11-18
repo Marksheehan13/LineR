@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Coded rows - LineR{% endblock %}
+{% block content %}
+<section class="card">
+  <h1>4. Coded rows</h1>
+  {% if v.rows %}
+  <p class="muted">{{ v.documents }} confirmed document{{ '' if v.documents == 1 else 's' }}. One row per tax band.
+     Rows of one document share a number: write it on the paper document.</p>
+  <table class="rows">
+    <thead><tr><th>Date</th><th>Supplier</th><th>Detail</th><th class="num">Net</th><th class="num">Rate</th>
+      <th class="num">VAT</th><th class="num">Gross</th><th class="num">Number</th></tr></thead>
+    <tbody>
+    {% for r in v.rows %}
+      <tr class="{{ 'hl' if r.highlight }}"><td>{{ r.date }}</td><td>{{ r.supplier }}</td><td>{{ r.detail }}</td>
+        <td class="num">{{ r.net }}</td><td class="num">{{ r.rate }}</td><td class="num">{{ r.vat }}</td>
+        <td class="num">{{ r.gross }}</td><td class="num">{{ r.number }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  <p><a class="button primary" href="{{ url_for('liner.export') }}">5. Download Excel</a>
+     <a class="button" href="{{ url_for('liner.upload_form') }}">Upload another</a></p>
+  {% else %}
+  <p>No confirmed documents yet.</p>
+  <p><a class="button primary" href="{{ url_for('liner.upload_form') }}">Upload a document</a></p>
+  {% endif %}
+</section>
+{% endblock %}

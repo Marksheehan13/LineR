@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Upload - LineR{% endblock %}
+{% block content %}
+<section class="card narrow">
+  <h1>1. Upload a document</h1>
+  <p class="muted">One invoice or receipt per upload: a photo, a scan or a PDF (one page, up to {{ max_mb }} MB).
+     LineR reads it so you check the data instead of typing it.</p>
+  {% if error %}<p class="alert error" role="alert">{{ error }}</p>{% endif %}
+  <form method="post" action="{{ url_for('liner.upload') }}" enctype="multipart/form-data">
+    <label class="drop" for="document">Choose an image or PDF
+      <input type="file" id="document" name="document" accept=".png,.jpg,.jpeg,.pdf,image/png,image/jpeg,application/pdf" required>
+    </label>
+    <button type="submit" class="primary">Read document</button>
+  </form>
+</section>
+{% endblock %}

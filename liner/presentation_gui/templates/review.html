@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block title %}Check document - LineR{% endblock %}
+{% macro flags(items) %}{% for f in items %}<div class="flag {{ f.severity }}">{{ f.message }}</div>{% endfor %}{% endmacro %}
+{% block content %}
+<h1>2-3. Check what was read {% if v.needs_review %}<span class="tag amber">Needs review</span>{% endif %}</h1>
+
+{% if v.notice %}<p class="alert error" role="alert">{{ v.notice }}</p>{% endif %}
+{% if v.not_saved %}<p class="alert error" role="alert"><strong>Not saved.</strong>
+  {% for f in v.blocking %}{{ f.message }} {% endfor %}</p>{% endif %}
+
+<div class="review">
+  <div class="image card">
+    {% if v.has_image %}
+    <div class="imgwrap" id="imgwrap">
+      <img src="{{ url_for('liner.image', doc_id=v.doc_id) }}" alt="The uploaded document">
+      <div id="hl" class="hl" hidden></div>
+    </div>
+    {% else %}<p class="muted">No image available.</p>{% endif %}
+  </div>
+
+  <form class="card" method="post" action="{{ url_for('liner.review_submit', doc_id=v.doc_id) }}">
+    <p class="muted label-ai">AI-read: suggestion only. You are responsible for every figure and rate you accept.</p>
+
+    {% for f in (v.supplier, v.date, v.total) %}
+    <label class="field {{ 'amber' if f.flags or f.error }}">{{ f.label }}
+      <input type="text" name="{{ f.name }}" value="{{ f.text }}" data-bbox="{{ f.bbox }}" autocomplete="off"
+             {% if f.name == 'date' %}placeholder="dd/mm/yyyy"{% elif f.name == 'total' %}inputmode="decimal" placeholder="0.00"{% endif %}>
+      {% if f.error %}<div class="flag blocking">{{ f.error }}</div>{% endif %}
+      {{ flags(f.flags) }}
+    </label>
+    {% endfor %}
+
+    <h2>Lines: detail, amount, band to claim</h2>
+    {% if not v.lines %}<p class="muted">No lines yet.</p>{% endif %}
+    {% for l in v.lines %}
+    <div class="line {{ 'amber' if l.needs_review }}" data-bbox="{{ l.bbox }}">
+      <input type="text" name="line-{{ l.index }}-detail" value="{{ l.detail }}" aria-label="Line {{ l.index + 1 }} detail" data-bbox="{{ l.bbox }}">
+      <input type="text" name="line-{{ l.index }}-amount" value="{{ l.amount }}" class="amt" inputmode="decimal" aria-label="Line {{ l.index + 1 }} amount" data-bbox="{{ l.bbox }}">
+      <select name="line-{{ l.index }}-band" aria-label="Line {{ l.index + 1 }} band">
+        <option value="" {{ 'selected' if not l.band }}>Band?</option>
+        {% for b in v.bands %}<option value="{{ b }}" {{ 'selected' if l.band == b }}>{{ b }}%</option>{% endfor %}
+      </select>
+      <label class="rm"><input type="checkbox" name="line-{{ l.index }}-remove"> remove</label>
+      {% if l.band_source == 'printed' and l.band %}<span class="src">printed {{ l.printed_rate }}%</span>{% endif %}
+      {% if l.band_source == 'suggested' %}
+        <div class="suggest">
+          <span class="tag amber">AI suggestion {{ l.confidence_text }}</span>
+          <label><input type="checkbox" name="line-{{ l.index }}-confirmed" {{ 'checked' if l.confirmed }}> Suggested band is right</label>
+          <div class="muted">{{ l.suggestion_reason }}</div>
+        </div>
+      {% endif %}
+      {% for k, msg in l.errors.items() %}<div class="flag blocking">{{ msg }}</div>{% endfor %}
+      {{ flags(l.flags) }}
+    </div>
+    {% endfor %}
+    <p><button type="submit" name="action" value="add_line">Add a line</button></p>
+
+    {{ flags(v.document_flags) }}
+    <p class="reconcile {{ 'ok' if v.reconciles else 'bad' }}">{{ v.reconcile_text }}</p>
+
+    <p class="actions">
+      <button type="submit" name="action" value="check">Check again</button>
+      <button type="submit" name="action" value="accept" class="primary">Accept and split by band</button>
+    </p>
+    <p class="muted small">A document cannot be saved until its lines add up to the printed total and every
+      suggested band has been confirmed or changed.</p>
+    <p class="muted small">{{ v.model_text }}</p>
+  </form>
+</div>
+
+<script>
+// Highlight on the image whatever field is being edited.
+(function () {
+  var hl = document.getElementById('hl');
+  if (!hl) return;
+  document.addEventListener('focusin', function (e) {
+    var raw = e.target.getAttribute && e.target.getAttribute('data-bbox');
+    if (!raw) { hl.hidden = true; return; }
+    var p = raw.split(',').map(Number);
+    hl.style.left = (p[0] * 100) + '%'; hl.style.top = (p[1] * 100) + '%';
+    hl.style.width = (p[2] * 100) + '%'; hl.style.height = (p[3] * 100) + '%';
+    hl.hidden = false;
+  });
+})();
+</script>
+{% endblock %}
