@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="shamrock">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,12 +9,23 @@
 <body>
   <header>
     <a class="brand" href="{{ url_for('liner.upload_form') }}">LineR</a>
+    {% set ep = request.endpoint or '' %}
     <nav>
-      <a href="{{ url_for('liner.upload_form') }}">Upload</a>
-      <a href="{{ url_for('liner.rows') }}">Coded rows</a>
+      <a href="{{ url_for('liner.upload_form') }}" class="{{ 'current' if ep in ('liner.upload_form', 'liner.upload') }}">Upload</a>
+      <a href="{{ url_for('liner.rows') }}" class="{{ 'current' if ep == 'liner.rows' }}">Coded rows</a>
     </nav>
     <span class="demo">Prototype: synthetic documents only. Do not upload real client documents.</span>
   </header>
-  <main>{% block content %}{% endblock %}</main>
+  <main>
+    {% set now = 1 if ep in ('liner.upload_form', 'liner.upload') else 2 if ep in ('liner.review', 'liner.review_submit') else 3 if ep == 'liner.rows' else 0 %}
+    {% if now %}
+    <ol class="steps" aria-label="Progress">
+      {% for n, label in [(1, 'Upload'), (2, 'Check'), (3, 'Coded rows and download')] %}
+      <li class="{{ 'now' if n == now else 'done' if n < now }}"{% if n == now %} aria-current="step"{% endif %}><span class="n">{{ n }}</span>{{ label }}</li>
+      {% endfor %}
+    </ol>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
 </body>
 </html>
