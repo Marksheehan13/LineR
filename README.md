@@ -48,8 +48,15 @@ python -m venv .venv
 source .venv/bin/activate          # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 
-python -m pytest -q                # all 220 tests, one command (a bare `pytest` also works)
+python -m pytest -q                # all 227 tests, one command (a bare `pytest` also works)
 python run.py                      # then open http://127.0.0.1:5000
+```
+
+Coverage and lint, as run in CI:
+
+```bash
+python -m pytest -q --cov=liner    # about 96% of liner/
+ruff check .
 ```
 
 On first start the app trains its classifier on 2,000 synthetic lines (about a second) and saves it
@@ -107,4 +114,4 @@ thresholds. Nothing secret is stored in the repository. `LINER_DATA_DIR` moves t
 - The band labels used to train the classifier are illustrative (`tools/vocabulary.py`), not tax advice.
 - No login, no CSRF protection, no retention limit on stored images: acceptable for a local demo, required for real use.
 
-Full detail, the deviation log and the risk update are in the technical document.
+Full detail is in the technical document (`docs/IS3329_D2_Technical_Document.docx`). The deviation log and the risk update are also in `docs/DEVIATION_LOG.md` and `docs/RISKS.md`.
