@@ -1,5 +1,16 @@
 {% extends "base.html" %}
-{% block title %}Upload - LineR{% endblock %}
+{% block title %}Upload - LineR<script>
+// Show the chosen file name and highlight the drop area.
+(function () {
+  var input = document.getElementById('document'), out = document.getElementById('picked');
+  input.addEventListener('change', function () {
+    var f = input.files && input.files[0];
+    out.hidden = !f; out.textContent = f ? 'Selected: ' + f.name : '';
+    input.closest('.drop').classList.toggle('has-file', !!f);
+  });
+})();
+</script>
+{% endblock %}
 {% block content %}
 <section class="card narrow">
   <h1>1. Upload a document</h1>
@@ -9,8 +20,20 @@
   <form method="post" action="{{ url_for('liner.upload') }}" enctype="multipart/form-data">
     <label class="drop" for="document">Choose an image or PDF
       <input type="file" id="document" name="document" accept=".png,.jpg,.jpeg,.pdf,image/png,image/jpeg,application/pdf" required>
+      <span class="picked" id="picked" hidden></span>
     </label>
     <button type="submit" class="primary">Read document</button>
   </form>
 </section>
+<script>
+// Show the chosen file name and highlight the drop area.
+(function () {
+  var input = document.getElementById('document'), out = document.getElementById('picked');
+  input.addEventListener('change', function () {
+    var f = input.files && input.files[0];
+    out.hidden = !f; out.textContent = f ? 'Selected: ' + f.name : '';
+    input.closest('.drop').classList.toggle('has-file', !!f);
+  });
+})();
+</script>
 {% endblock %}
