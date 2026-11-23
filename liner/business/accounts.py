@@ -1,4 +1,4 @@
-"""Layer 3, Login and accounts: MOCKED. One hard-coded demo user, returned through the same
+"""Layer 3, Login and accounts (D1 component: Login and accounts, Mocked): MOCKED. One hard-coded demo user, returned through the same
 ``authenticate(credentials)`` interface a real implementation would use. Login is not the feature
 being demonstrated (Deliverable 1, section 1.4)."""
 from __future__ import annotations
