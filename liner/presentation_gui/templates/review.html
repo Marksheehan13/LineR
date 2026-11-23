@@ -31,7 +31,8 @@
     {% endfor %}
 
     <h2>Lines: detail, amount, band to claim</h2>
-    {% if not v.lines %}<p class="muted">No lines yet.</p>{% endif %}
+    {% if not v.lines %}<p class="muted">No lines yet.</p>{% else %}
+    <div class="line head" aria-hidden="true"><span>Detail</span><span>Amount</span><span>Band</span><span></span></div>{% endif %}
     {% for l in v.lines %}
     <div class="line {{ 'amber' if l.needs_review }}" data-bbox="{{ l.bbox }}">
       <input type="text" name="line-{{ l.index }}-detail" value="{{ l.detail }}" aria-label="Line {{ l.index + 1 }} detail" data-bbox="{{ l.bbox }}">
