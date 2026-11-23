@@ -20,8 +20,8 @@
   <p><a class="button primary" href="{{ url_for('liner.export') }}">5. Download Excel</a>
      <a class="button" href="{{ url_for('liner.upload_form') }}">Upload another</a></p>
   {% else %}
-  <p>No confirmed documents yet.</p>
-  <p><a class="button primary" href="{{ url_for('liner.upload_form') }}">Upload a document</a></p>
+  <div class="empty"><p>No confirmed documents yet.</p>
+  <p><a class="button primary" href="{{ url_for('liner.upload_form') }}">Upload a document</a></p></div>
   {% endif %}
 </section>
 {% endblock %}
